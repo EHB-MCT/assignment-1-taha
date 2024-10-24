@@ -1,4 +1,3 @@
-// src/hooks/useBMI.js
 import { useState } from "react";
 import { calculateBMI } from "../utils/bmiCalculator";
 
