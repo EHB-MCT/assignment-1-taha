@@ -16,16 +16,17 @@ const Home = () => {
       <div className="mb-20 mt-5 flex flex-col gap-5">
         <h1 className=" text-black font-extrabold text-2xl">BMI Calculator</h1>
         <h2 className="text-[#4a4a4c] font-normal text-md underline underline-offset-[40px] decoration-size-[0.5px] decoration-[#dedfe3]">
-          Wil je weten of je een gezond gewicht hebt? Bereken snel je BMI. De
-          BMI geeft aan of je gewicht gezond is in relatie tot je lengte.
+          Curious if you have a healthy weight? Quickly calculate your BMI. The
+          BMI indicates whether your weight is healthy in relation to your
+          height.
         </h2>
       </div>
-      <div className="flex  justify-center align-middle gap-10">
-        <div className="flex flex-col gap-10 flex-1">
+      <div className="flex  justify-center align-middle gap-4">
+        <div className="flex flex-col gap-4 flex-1">
           <BMIForm calculateBMI={handleCalculateBMI} />
           <BMIResult bmi={bmi} category={category} />
         </div>
-        <div className="bmi-gauge">
+        <div className="bmi-gauge bg-[#eef5ff] rounded-lg shadow-inner flex-3  pb-10 h-auto">
           <BMIGauge bmiValue={bmi || 0} />
         </div>
       </div>

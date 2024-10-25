@@ -124,7 +124,7 @@ const BMIGaugeChart = ({ bmiValue = 0 }) => {
   };
 
   return (
-    <div className="flex flex-col relative items-center justify-center bg-[#eef5ff] rounded-lg shadow-inner flex-3  pb-10">
+    <div className="flex flex-col relative items-center justify-center ">
       <div className="w-full max-w-md">
         <Doughnut data={data} options={options} ref={chartRef} />
       </div>

@@ -18,7 +18,7 @@ const HealthTips = ({ category }) => {
   const tip = healthTips[tipKey] || "Please calculate your BMI first.";
 
   return (
-    <div className="flex flex-col items-center justify-center bg-white rounded-lg shadow-md w-full mt-8 pt-10 pb-10 gap-6">
+    <div className="flex flex-col items-center justify-center bg-[#eef5ff] rounded-lg shadow-inner w-full mt-6 pt-6 pb-6 gap-6">
       <h1 className="text-black font-semibold text-2xl">Health Tips</h1>
       <p className="text-black">{tip}</p>
     </div>
