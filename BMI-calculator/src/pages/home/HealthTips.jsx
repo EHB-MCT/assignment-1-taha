@@ -12,14 +12,15 @@ const healthTips = {
 };
 
 const HealthTips = ({ category }) => {
-  // Convert category to lowercase and replace spaces for key matching
+  if (!category) return null;
+
   const tipKey = category.toLowerCase();
   const tip = healthTips[tipKey] || "Please calculate your BMI first.";
 
   return (
-    <div className="health-tips">
-      <h2>Health Tips</h2>
-      <p>{tip}</p>
+    <div className="flex flex-col items-center justify-center bg-white rounded-lg shadow-md w-full mt-8 pt-10 pb-10 gap-6">
+      <h1 className="text-black font-semibold text-2xl">Health Tips</h1>
+      <p className="text-black">{tip}</p>
     </div>
   );
 };
