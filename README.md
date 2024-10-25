@@ -1,22 +1,90 @@
-# Your project name
-A short description of your project. 
+# BMI Calculator App
 
-Next, read this example and adapt it to your project.
+This web app allows users to calculate their BMI, view health tips based on BMI values, convert units, and visualize BMI in a chart. This project is built with React and includes features like metric/imperial unit conversions, a BMI chart visualization, and helpful health tips.
 
-If you want to add more sections, please do so after the existing ones (avoid burying your sources under a lot of text!).
+## Table of Contents
 
-Live link: [website.be](website.be) (optional)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Contact](#contact)
+- [References](#references)
 
-## Up & running (optional)
-- This should contain step by step instructions to run your project
-- Login information is mentioned here if applicable.
+## Installation
 
-## Sources 
+### Prerequisites
 
-Given are some examples, delete and replace with your own.
+- Node.js
+- npm
 
-- [Multi auth in Laravel](https://stackoverflow.com/questions/50514738/multi-auth-use-one-page-login-laravel) used in http > controller > LoginController.php (line 18-67)
-- [Audio from ChatGPT](https://chatgpt.com/c/66dae37e-6da8-8001-99ab-245ad328416a) used in resources > music
-- [Chatgpt.com](https://chatgpt.com) ⚠️ this is an invalid example, because it links to a homepage instead of a specific page or issue
-- Generate a ChatGPT share link: options (three dots) > share.
-- If your lecturer still sees these default examples, you're in trouble
+### Steps
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/EHB-MCT/assignment-1-taha.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd BMI-calculator
+   ```
+
+3. Install the dependencies:
+
+   ```bash
+   npm install
+   ```
+
+   The following packages will be installed:
+
+   - `chart.js`: "^4.4.5"
+   - `chartjs-plugin-datalabels`: "^2.2.0"
+   - `flowbite-react`: "^0.10.2"
+   - `react`: "^18.3.1"
+   - `react-chartjs-2`: "^5.2.0"
+   - `react-dom`: "^18.3.1"
+   - `react-router-dom`: "^6.27.0"
+
+4. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Open your browser and visit `http://localhost:5173` to view the app.
+
+## Usage
+
+1. Enter your height and weight in the input fields on the home page.
+2. Select between Metric and Imperial units.
+3. Click "Calculate BMI" to see your BMI value, health tips, and BMI visualization chart.
+4. Explore additional health resources based on your BMI classification.
+
+## Features
+
+- **BMI Calculation**: Calculate BMI by entering height and weight in metric or imperial units.
+- **Unit Conversion**: Switch between metric and imperial units.
+- **BMI Visualization**: View BMI category breakdown and your current BMI in a chart.
+- **Health Tips**: Get personalized health tips based on BMI classification.
+- **Responsive Design**: Works seamlessly on various devices.
+
+## Contact
+
+For questions, feedback, or contributions, feel free to reach out:
+
+- **Your Name**
+  - **Email**: taha.hasan@student.ehb.be
+  - **GitHub**: [your-username](https://github.com/tahahasan7)
+
+## References
+
+- **Chart.js Documentation**: [Chart.js](https://www.chartjs.org/docs/latest/)
+- **React Router Documentation**: [React Router](https://reactrouter.com/)
+- **Flowbite Documentation**: [Flowbite](https://flowbite.com)
+- **ChatGPT**: [ChatGPT](https://chatgpt.com)
+
+## License
+
+This project is licensed under the MIT License. See `LICENSE` for more details.
