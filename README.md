@@ -74,9 +74,9 @@ This web app allows users to calculate their BMI, view health tips based on BMI 
 
 For questions, feedback, or contributions, feel free to reach out:
 
-- **Your Name**
+- **Taha Hasan**
   - **Email**: taha.hasan@student.ehb.be
-  - **GitHub**: [your-username](https://github.com/tahahasan7)
+  - **GitHub**: [tahahasan7](https://github.com/tahahasan7)
 
 ## References
 
