@@ -1,5 +1,6 @@
 import React from "react";
 
+// Object holding health tips based on BMI categories
 const healthTips = {
   underweight:
     "It's important to eat nutrient-rich foods and consult a healthcare provider for personalized advice.",
@@ -12,8 +13,10 @@ const healthTips = {
 };
 
 const HealthTips = ({ category }) => {
+  // Return null if no category is provided to avoid rendering empty content
   if (!category) return null;
 
+  // Formatting the category to match keys in the healthTips object
   const tipKey = category.toLowerCase();
   const tip = healthTips[tipKey] || "Please calculate your BMI first.";
 

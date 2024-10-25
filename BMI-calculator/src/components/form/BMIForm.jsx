@@ -1,32 +1,62 @@
 // src/components/BMIForm.js
+
 import React, { useState } from "react";
 import Button from "../ui/button/button.jsx";
 import "./index.css";
 
+/**
+ * Form component for BMI calculation, allowing users to enter height and weight in metric or imperial units.
+ *
+ * @param {Function} calculateBMI - Function to calculate BMI using the provided height and weight.
+ * @returns {JSX.Element} The rendered BMI form component.
+ */
 const BMIForm = ({ calculateBMI }) => {
+  // State to manage height (either in metric or imperial units)
   const [height, setHeight] = useState({ feet: "", inches: "", cm: "" });
-  const [weight, setWeight] = useState("");
-  const [unit, setUnit] = useState("metric"); // State to toggle between metric and imperial
 
-  // Convert height and weight to metric if needed
+  // State to manage weight
+  const [weight, setWeight] = useState("");
+
+  // State to toggle between metric and imperial units
+  const [unit, setUnit] = useState("metric");
+
+  /**
+   * Converts height and weight to metric units if imperial units are selected.
+   *
+   * @returns {Object} An object containing:
+   *  - `height` (number): Height in centimeters.
+   *  - `weight` (number): Weight in kilograms.
+   */
   const convertToMetric = () => {
-    let metricHeight =
+    // Convert height to centimeters
+    const metricHeight =
       unit === "imperial"
         ? parseFloat(height.feet) * 30.48 + parseFloat(height.inches) * 2.54
         : parseFloat(height.cm);
 
-    let metricWeight =
+    // Convert weight to kilograms
+    const metricWeight =
       unit === "imperial" ? parseFloat(weight) * 0.453592 : parseFloat(weight);
 
     return { height: metricHeight, weight: metricWeight };
   };
 
+  /**
+   * Handles form submission, converting values to metric and triggering the BMI calculation.
+   *
+   * @param {Event} e - Form submission event.
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
     const { height: metricHeight, weight: metricWeight } = convertToMetric();
     calculateBMI(metricHeight, metricWeight);
   };
 
+  /**
+   * Handles unit toggle between metric and imperial, clearing previous input values.
+   *
+   * @param {Event} e - The change event for unit selection.
+   */
   const handleUnitChange = (e) => {
     setUnit(e.target.value);
     setHeight({ feet: "", inches: "", cm: "" });
@@ -39,6 +69,7 @@ const BMIForm = ({ calculateBMI }) => {
         className="max-w-sm mx-auto flex flex-col justify-start p-5"
         onSubmit={handleSubmit}
       >
+        {/* Unit selection dropdown */}
         <div className="mb-5 flex flex-col">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">
             Unit
@@ -53,6 +84,7 @@ const BMIForm = ({ calculateBMI }) => {
           </select>
         </div>
 
+        {/* Height input */}
         <div className="mb-5">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">
             Height
@@ -94,6 +126,7 @@ const BMIForm = ({ calculateBMI }) => {
           )}
         </div>
 
+        {/* Weight input */}
         <div className="mb-5">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">
             Weight
@@ -113,6 +146,7 @@ const BMIForm = ({ calculateBMI }) => {
           </div>
         </div>
 
+        {/* Submit Button */}
         <Button />
       </form>
     </div>

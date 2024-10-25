@@ -7,9 +7,17 @@ import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
+/**
+ * A gauge chart component to visualize BMI value using a doughnut chart.
+ *
+ * @param {Object} props - The component props.
+ * @param {number} props.bmiValue - The current BMI value to visualize.
+ * @returns {JSX.Element|null} The rendered gauge chart component or null if no BMI value is provided.
+ */
 const BMIGaugeChart = ({ bmiValue = 0 }) => {
   const chartRef = useRef(null);
 
+  // Clear chart instance on component unmount to prevent memory leaks
   useEffect(() => {
     return () => {
       if (chartRef.current) {
@@ -18,10 +26,10 @@ const BMIGaugeChart = ({ bmiValue = 0 }) => {
     };
   }, []);
 
-  if (bmiValue === null) {
-    return null;
-  }
+  // Render nothing if BMI value is absent
+  if (bmiValue === null) return null;
 
+  // BMI categories with respective ranges and colors
   const categories = [
     { name: "Underweight", range: [0, 18.5], color: "#ffc300" },
     { name: "Normal", range: [18.5, 24.9], color: "#20bf55" },
@@ -29,22 +37,34 @@ const BMIGaugeChart = ({ bmiValue = 0 }) => {
     { name: "Obese", range: [29.9, 40], color: "#ff008a" },
   ];
 
-  const getCategoryPercentage = (bmi) => {
+  /**
+   * Calculates the percentage position within the BMI category based on the current BMI.
+   *
+   * @param {number} bmi - The current BMI value.
+   * @returns {number} The percentage position within the category.
+   */
+  const getPercentageWithinCategory = (bmi) => {
     const category = categories.find(
       (cat) => bmi >= cat.range[0] && bmi < cat.range[1]
     );
-    if (!category) return 100; // For BMI >= 40
+    if (!category) return 100;
 
-    const categoryRange = category.range[1] - category.range[0];
-    const valueInCategory = bmi - category.range[0];
-    return (valueInCategory / categoryRange) * 25;
+    const rangeSize = category.range[1] - category.range[0];
+    const positionWithinCategory = bmi - category.range[0];
+    return (positionWithinCategory / rangeSize) * 25;
   };
 
+  /**
+   * Calculates the gauge position based on the current BMI.
+   *
+   * @param {number} bmi - The current BMI value.
+   * @returns {number} The calculated position for the gauge.
+   */
   const getGaugePosition = (bmi) => {
-    if (bmi < 18.5) return getCategoryPercentage(bmi);
-    if (bmi < 24.9) return 25 + getCategoryPercentage(bmi);
-    if (bmi < 29.9) return 50 + getCategoryPercentage(bmi);
-    if (bmi < 40) return 75 + getCategoryPercentage(bmi);
+    if (bmi < 18.5) return getPercentageWithinCategory(bmi);
+    if (bmi < 24.9) return 25 + getPercentageWithinCategory(bmi);
+    if (bmi < 29.9) return 50 + getPercentageWithinCategory(bmi);
+    if (bmi < 40) return 75 + getPercentageWithinCategory(bmi);
     return 100;
   };
 
@@ -78,9 +98,8 @@ const BMIGaugeChart = ({ bmiValue = 0 }) => {
           align: "center",
           color: "white",
           font: { weight: "bold" },
-          formatter: (value, context) => {
-            return context.dataIndex === 0 ? bmiValue.toFixed(1) : "";
-          },
+          formatter: (value, context) =>
+            context.dataIndex === 0 ? bmiValue.toFixed(1) : "",
         },
       },
     ],
@@ -104,10 +123,9 @@ const BMIGaugeChart = ({ bmiValue = 0 }) => {
         callbacks: {
           label: (context) => {
             const category = categories[context.dataIndex];
-            if (context.datasetIndex === 0) {
-              return `${category.name}: ${category.range[0]}-${category.range[1]} BMI`;
-            }
-            return context.datasetIndex === 1 && context.dataIndex === 0
+            return context.datasetIndex === 0
+              ? `${category.name}: ${category.range[0]}-${category.range[1]} BMI`
+              : context.datasetIndex === 1 && context.dataIndex === 0
               ? `Current BMI: ${bmiValue.toFixed(1)}`
               : "";
           },
@@ -116,15 +134,18 @@ const BMIGaugeChart = ({ bmiValue = 0 }) => {
     },
   };
 
-  const getCurrentCategory = (bmi) => {
-    return (
-      categories.find((cat) => bmi >= cat.range[0] && bmi < cat.range[1])
-        ?.name || "Extreme Obesity"
-    );
-  };
+  /**
+   * Gets the current BMI category based on the BMI value.
+   *
+   * @param {number} bmi - The current BMI value.
+   * @returns {string} The name of the BMI category.
+   */
+  const getCurrentCategory = (bmi) =>
+    categories.find((cat) => bmi >= cat.range[0] && bmi < cat.range[1])?.name ||
+    "Extreme Obesity";
 
   return (
-    <div className="flex flex-col relative items-center justify-center ">
+    <div className="flex flex-col relative items-center justify-center">
       <div className="w-full max-w-md">
         <Doughnut data={data} options={options} ref={chartRef} />
       </div>

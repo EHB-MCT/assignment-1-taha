@@ -8,7 +8,9 @@ import "../../styles/App.css";
 import HealthTips from "./HealthTips";
 import "./index.css";
 
+// Home component: Main page layout for the BMI Calculator.
 const Home = () => {
+  // Extracting values and methods from the custom hook 'useBMI'.
   const { bmi, category, handleCalculateBMI } = useBMI();
 
   return (
